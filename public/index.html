@@ -13,55 +13,57 @@
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
 		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-panels.min.js"></script>
-		<script src="js/init.js"></script>
-
+		
 		<link rel="stylesheet" href="css/dc.css" />
 		<link rel="stylesheet" href="css/stylenew.css" />
 		<link rel="stylesheet" href="css/introjs.css" />
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
-		<style>
-			.intro_button{
-				margin-top: 38px;
-			    float: left;
-			    margin-left: 30px;
-		    	background-color: #1ab394;
-		    	color: white;
-			}
-		</style>
+
 	</head>
 	<body>
 		<div id="wrapper">
 			<!-- Header -->
 			<div id="header">
-				<button class="intro_button" type="button" autofocus onclick="javascript:introJs().setOption('showProgress', true).start();">Start Tour!</button>
-				<div class="container"> 					<!-- Logo -->
-					<div id="logo">
-						<h1><a href="#">Analytics Dashboard</a></h1>
+				<div class="container">
+					<div class="row">
+						<div class="col-md-2">
+							<img class="logo" src="/images/ubinu_logo.png" alt="ubinu">
+						</div>
+						<div id="title" class="col-md-8">
+							<h1>Analytics Dashboard</h1>
+						</div>
+						<div class="col-md-2">
+							<button class="btn btn-info intro_button" type="button" autofocus onclick="javascript:introJs().setOption('showProgress', true).start();">Start Tour!</button>
+						</div>
 					</div>
 					<!-- Nav -->
 				</div>
 			</div>
 			<!-- /Header -->
-			
-			<div id="page" style="margin-top:-61px;">
+			<div class="clearfix"></div>
+
+			<div id="page">
 				<div class="container">
 					<div class="row">
-						<div class="2u chart-wrapper" data-step="1" data-intro="State Selector Drop Down. Select a state to view specific stats.OPTIONAL FIELD"style="font-weight: normal" data-position="right" id="menuselect" style="background-color: #33CC99; height: 60px;">
+						<div class="col-md-2 chart-wrapper" data-step="1" data-intro="Store Selector Menu. Select a Store to view specific stats.OPTIONAL FIELD"style="font-weight: normal" data-position="right" id="menuselect" style="background-color: #33CC99; height: 60px;">
 							<div class="chart-title">  <strong> Store Selector </strong> </div>
 						</div>
-						<div class="2u">
+						<div class="col-md-2">
 							<div> <span> &nbsp</span></div>
 						</div>
-						<div class="2u chart-wrapper" data-step="2" data-intro="Widget Displays the total donation count for the selections"style="font-weight: normal" data-position="bottom" id="total-projects">
-							<div class="chart-title">  <strong> Total Sales </strong> </div>	
+						<div class="col-md-2 chart-wrapper" data-step="2" data-intro="Displays the total number of sales for the selections"style="font-weight: normal" data-position="bottom" id="total-projects">
+							<div class="chart-title white">  <strong> Total Sales </strong> </div>	
 						</div>
-						<div class="2u chart-wrapper"  data-step="3" data-intro="Widget Displays the total donation amount for the selections"style="font-weight: normal" data-position="bottom" id="net-donations">
+						<div class="col-md-2 chart-wrapper"  data-step="3" data-intro="Displays the total revenue for the selections"style="font-weight: normal" data-position="bottom" id="net-donations">
 							<div class="chart-title">  <strong> Revenue ($) </strong> </div>					
 						</div>
-						<div class="3u dc-data-count dc-chart"  data-step="4" data-intro="Selection widget displays the total rows available and rows currently selected in analysis"style="font-weight: normal" data-position="left"  id="row-selection">
+						<div class="col-md-3 dc-data-count dc-chart" data-step="4" data-intro="Displays the total records available and rows currently selected in analysis"style="font-weight: normal" data-position="left"  id="row-selection">
 							<span class="filter-count">_</span> / <span class="total-count">_</span> records | <br\>
 							<span  data-step="11" data-intro="Click to reset the filters for the analysis"style="font-weight: normal" data-position="left" > 
 								<a href='javascript:dc.filterAll();dc.redrawAll();'><font color="#33CC99">Reset All</font></a>
@@ -70,25 +72,25 @@
 					</div>
 
 					<div class="row">
-						<div class="8u chart-wrapper"  data-step="5" data-intro="Area chart showing the number of donations over a period of time. Drag and select to view detailed data for a particular time range"style="font-weight: normal" data-position="right"  id="date-chart">
+						<div class="col-md-6 chart-wrapper"  data-step="5" data-intro="Area chart showing the number of sales over a period of time. Drag and select to view detailed data for a particular time range"style="font-weight: normal" data-position="right"  id="date-chart">
 							<div class="chart-title bold"> <strong> Sales </strong></div>
 						</div>
-						<div class="2u chart-wrapper" data-step="6" data-intro="View the donation count for the different type of resources. Hover the mouse for tooltips."style="font-weight: normal" data-position="left"  id="resource-chart">
-							<div class="chart-title">  <strong> Sale Types </strong> </div>
+						<div class="col-md-3 chart-wrapper" data-step="6" data-intro="View the sales count for the different type of product categories. Hover the mouse for tooltips."style="font-weight: normal" data-position="left"  id="resource-chart">
+							<div class="chart-title">  <strong> Product Categories </strong> </div>
 						</div>
-						<div class="2u chart-wrapper"  data-step="7" data-intro="Funding Status Displayed on a donut chart. Hover for tool tips"style="font-weight: normal" data-position="left"  id="funding-chart">
+						<div class="col-md-3 chart-wrapper"  data-step="7" data-intro="Payment type used displayed on a donut chart. Hover for tool tips"style="font-weight: normal" data-position="left"  id="funding-chart">
 							<div class="chart-title">  <strong> Payment type </strong> </div>					
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="4u chart-wrapper"  data-step="8" data-intro="View the donation counts for the different grade groups"style="font-weight: normal" data-position="right"  id="grade-chart">
+						<div class="col-md-4 chart-wrapper"  data-step="8" data-intro="View the sale counts for the different age groups"style="font-weight: normal" data-position="right"  id="grade-chart">
 							<div class="chart-title">  <strong> Age Groups </strong> </div>
 						</div>
-						<div class="4u chart-wrapper"  data-step="9" data-intro="View the donation count for the different poverty levels. Hover the cursoe for tooltips."style="font-weight: normal" data-position="top" id="poverty-chart">
+						<div class="col-md-4 chart-wrapper"  data-step="9" data-intro="View the sale count for the different loyalty levels. Hover the cursoe for tooltips."style="font-weight: normal" data-position="top" id="poverty-chart">
 							<div class="chart-title">  <strong> Loyalty type </strong></div>
 						</div>
-						<div class="4u chart-wrapper"  data-step="10" data-intro="View the donation amount by state.THIS CHART IS STAND ALONE AND WILL NOT FILTER BY THE OTHER SELECTIONS"style="font-weight: normal" data-position="left"  id="state-donations">
+						<div class="col-md-4 chart-wrapper"  data-step="10" data-intro="View the sales amount by store location."style="font-weight: normal" data-position="left"  id="state-donations">
 							<div class="chart-title">  <strong> Sales per Store (€) </strong> </div>
 						</div>
 					</div>

@@ -49,7 +49,9 @@ function makeGraphs(error, apiData) {
 		return d.funding_status;
 	});
 
-
+	var totalSalesDate = datePosted.group().reduceSum(function(d) {
+		return d.total_price;
+	});
 
 	var netTotalDonations = ndx.groupAll().reduceSum(function(d) {return d.total_price;});
 
@@ -69,6 +71,7 @@ console.log(maxDate);
 	var totalProjects = dc.numberDisplay("#total-projects");
 	var netDonations = dc.numberDisplay("#net-donations");
 	var stateDonations = dc.barChart("#state-donations");
+	var volumeChart = dc.barChart('#monthly-volume-chart');
 
 
   selectField = dc.selectMenu('#menuselect')
@@ -96,15 +99,32 @@ console.log(maxDate);
 		.height(220)
 		.margins({top: 10, right: 50, bottom: 30, left: 50})
 		.dimension(datePosted)
-		.group(projectsByDate)
+		.group(totalSalesDate)	// projectsByDate
 		.renderArea(true)
 		.transitionDuration(500)
+		.mouseZoomable(true)
+		.rangeChart(volumeChart)
 		.x(d3.time.scale().domain([minDate, maxDate]))
 		.elasticY(true)
 		.renderHorizontalGridLines(true)
     	.renderVerticalGridLines(true)
+    	.brushOn(true)
 		.xAxisLabel("Date")
-		.yAxis().ticks(6);
+		.yAxis().tickFormat(d3.format("s"));
+
+
+	volumeChart.width(990) /* dc.barChart('#monthly-volume-chart', 'chartGroup'); */
+        .height(40)
+        .margins({top: 0, right: 50, bottom: 20, left: 40})
+        .dimension(datePosted)
+        .group(projectsByDate)
+        .centerBar(true)
+        .gap(1)
+		.x(d3.time.scale().domain([minDate, maxDate]))
+        .round(d3.time.month.round)
+        .alwaysUseRounding(true)
+        .xUnits(d3.time.months);
+
 
 	resourceTypeChart
         //.width(300)
@@ -119,6 +139,7 @@ console.log(maxDate);
 		.height(220)
         .dimension(povertyLevel)
         .group(projectsByPovertyLevel)
+        .elasticX(true)
         .xAxis().ticks(4);
 
 	gradeLevelChart
@@ -126,17 +147,16 @@ console.log(maxDate);
 		.height(220)
         .dimension(gradeLevel)
         .group(projectsByGrade)
+        .elasticX(true)
         .xAxis().ticks(4);
 
-  
-          fundingStatusChart
-            .height(220)
-            //.width(350)
-            .radius(90)
-            .innerRadius(40)
-            .transitionDuration(1000)
-            .dimension(fundingStatus)
-            .group(projectsByFundingStatus);
+  	fundingStatusChart
+    	.height(220)
+	    .radius(90)
+	    .innerRadius(40)
+	    .transitionDuration(1000)
+	    .dimension(fundingStatus)
+	    .group(projectsByFundingStatus);
 
 
     stateDonations
