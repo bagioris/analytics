@@ -6,11 +6,11 @@ function makeGraphs(error, apiData) {
 	
 //Start Transformations
 	var dataSet = apiData;
-	var dateFormat = d3.time.format("%m/%d/%Y");
+	var dateFormat = d3.time.format("%d/%m/%Y");
 	dataSet.forEach(function(d) {
 		d.date_posted = dateFormat.parse(d.date_posted);
 				d.date_posted.setDate(1);
-		d.total_donations = +d.total_donations;
+		d.total_price = +d.total_price;
 	});
 
 	//Create a Crossfilter instance
@@ -18,12 +18,12 @@ function makeGraphs(error, apiData) {
 
 	//Define Dimensions
 	var datePosted = ndx.dimension(function(d) { return d.date_posted; });
-	var gradeLevel = ndx.dimension(function(d) { return d.grade_level; });
+	var gradeLevel = ndx.dimension(function(d) { return d.age_level; });
 	var resourceType = ndx.dimension(function(d) { return d.resource_type; });
-	var fundingStatus = ndx.dimension(function(d) { return d.funding_status; });
-	var povertyLevel = ndx.dimension(function(d) { return d.poverty_level; });
+	var fundingStatus = ndx.dimension(function(d) { return d.payment_type; });
+	var povertyLevel = ndx.dimension(function(d) { return d.membership_level; });
 	var state = ndx.dimension(function(d) { return d.school_state; });
-	var totalDonations  = ndx.dimension(function(d) { return d.total_donations; });
+	var totalDonations  = ndx.dimension(function(d) { return d.total_price; });
 
 
 	//Calculate metrics
@@ -38,7 +38,7 @@ function makeGraphs(error, apiData) {
 
 	//Calculate Groups
 	var totalDonationsState = state.group().reduceSum(function(d) {
-		return d.total_donations;
+		return d.total_price;
 	});
 
 	var totalDonationsGrade = gradeLevel.group().reduceSum(function(d) {
@@ -51,7 +51,7 @@ function makeGraphs(error, apiData) {
 
 
 
-	var netTotalDonations = ndx.groupAll().reduceSum(function(d) {return d.total_donations;});
+	var netTotalDonations = ndx.groupAll().reduceSum(function(d) {return d.total_price;});
 
 	//Define threshold values for data
 	var minDate = datePosted.bottom(1)[0].date_posted;
@@ -103,7 +103,7 @@ console.log(maxDate);
 		.elasticY(true)
 		.renderHorizontalGridLines(true)
     	.renderVerticalGridLines(true)
-		.xAxisLabel("Year")
+		.xAxisLabel("Date")
 		.yAxis().ticks(6);
 
 	resourceTypeChart
